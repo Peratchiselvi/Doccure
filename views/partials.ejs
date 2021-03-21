@@ -1,0 +1,63 @@
+<!-- Header -->
+			<%- include("patheader.ejs"); %>
+            <!-- User Menu -->
+            <li class="nav-item dropdown has-arrow logged-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img">
+                        <% if(user.img){ %>
+                            <img class="rounded-circle"
+                                src="data:doctor/<%=user.img.contentType%>;base64,<%=user.img.data.toString('base64')%>"
+                                width="31" alt="Ryan Taylor">
+                            <% } else{ %>
+                                <img class="rounded-circle" src="img/doctors/doctor-thumb-02.jpg" width="31">
+                                <% } %>
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="user-header">
+                        <div class="avatar avatar-sm">
+                            <img src="img/doctors/doctor-thumb-02.jpg" alt="User Image"
+                                class="avatar-img rounded-circle">
+                        </div>
+                        <div class="user-text">
+                            <% if(user){ %>
+                                <h6>
+                                    <%=user.fname%>
+                                </h6>
+                                <% }else{%>
+                                    <h6>Darren Elder</h6>
+                                    <%}%>
+                                        <p class="text-muted mb-0">Doctor</p>
+                        </div>
+                    </div>
+                    <a class="dropdown-item" href="doctor-dashboard.html">Dashboard</a>
+                    <a class="dropdown-item" href="doctor-profile-settings.html">Profile Settings</a>
+                </div>
+            </li>
+            <li><a href="/logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+            <!-- /User Menu -->
+
+        </ul>
+    </nav>
+</header>
+<!-- /Header -->
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
+                    </ol>
+                </nav>
+                <h2 class="breadcrumb-title">Profile Settings</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content -->

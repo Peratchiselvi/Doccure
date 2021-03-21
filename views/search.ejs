@@ -1,0 +1,408 @@
+<!DOCTYPE html> 
+<html lang="en">
+	
+<!-- doccure/search.html  30 Nov 2019 04:12:16 GMT -->
+<head>
+		<meta charset="utf-8">
+		<title>Doccure</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		
+		<!-- Favicons -->
+		<link href="img/favicon.png" rel="icon">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="bootstrap.min.css">
+		
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
+		<link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+		
+		<!-- Datetimepicker CSS -->
+		<link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
+		
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+		
+		<!-- Fancybox CSS -->
+		<link rel="stylesheet" href="plugins/fancybox/jquery.fancybox.min.css">
+		
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="style.css">
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+	
+	</head>
+	<body>
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper"><%- include("patheader.ejs"); %>
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-8 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item active" aria-current="page">Doctors List</li>
+								</ol>
+							</nav>
+						</div><!--
+						<div class="col-md-4 col-12 d-md-block d-none">
+							<div class="sort-by">
+								<span class="sort-title">Sort by</span>
+								<span class="sortby-fliter">
+									<select class="select">
+										<option>Select</option>
+										<option class="sorting">Rating</option>
+										<option class="sorting">Popular</option>
+										<option class="sorting">Latest</option>
+										<option class="sorting">Free</option>
+									</select>
+								</span>
+							</div>
+						</div>-->
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content" style="width: 100%;"><!--
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+						
+							
+							<div class="card search-filter">
+								<div class="card-header">
+									<h4 class="card-title mb-0">Search Filter</h4>
+								</div>
+								<div class="card-body">
+								<div class="filter-widget">
+									<div class="cal-icon">
+										<input type="text" class="form-control datetimepicker" placeholder="Select Date">
+									</div>			
+								</div>
+								<div class="filter-widget">
+									<h4>Gender</h4>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="gender_type" checked>
+											<span class="checkmark"></span> Male Doctor
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="gender_type">
+											<span class="checkmark"></span> Female Doctor
+										</label>
+									</div>
+								</div>
+								<div class="filter-widget">
+									<h4>Select Specialist</h4>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist" checked>
+											<span class="checkmark"></span> Urology
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist" checked>
+											<span class="checkmark"></span> Neurology
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span> Dentist
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span> Orthopedic
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span> Cardiologist
+										</label>
+									</div>
+									<div>
+										<label class="custom_check">
+											<input type="checkbox" name="select_specialist">
+											<span class="checkmark"></span> Cardiologist
+										</label>
+									</div>
+								</div>
+									<div class="btn-search">
+										<button type="button" class="btn btn-block">Search</button>
+									</div>	
+								</div>
+							</div>
+							
+						</div>-->
+						
+						<div class="col-md-12 col-lg-8 col-xl-9" style="margin: auto;width: 100%;">
+
+							<!-- Doctor Widget -->
+							<!--
+							<div class="card">
+								<div class="card-body">
+									<div class="doctor-widget">
+										<div class="doc-info-left">
+											<div class="doctor-img">
+												<a href="doctor-profile.html">
+													<img src="img/doctors/doctor-thumb-01.jpg" class="img-fluid" alt="User Image">
+												</a>
+											</div>
+											<div class="doc-info-cont">
+												<h4 class="doc-name"><a href="doctor-profile.html">Dr. Ruby Perrin</a></h4>
+												<p class="doc-speciality">MDS - Periodontology and Oral Implantology, BDS</p>
+												<h5 class="doc-department"><img src="img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
+												<div class="rating">
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star"></i>
+													<span class="d-inline-block average-rating">(17)</span>
+												</div>
+												<div class="clinic-details">
+													<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Florida, USA</p>
+													<ul class="clinic-gallery">
+														<li>
+															<a href="img/features/feature-01.jpg" data-fancybox="gallery">
+																<img src="img/features/feature-01.jpg" alt="Feature">
+															</a>
+														</li>
+														<li>
+															<a href="img/features/feature-02.jpg" data-fancybox="gallery">
+																<img  src="img/features/feature-02.jpg" alt="Feature">
+															</a>
+														</li>
+														<li>
+															<a href="img/features/feature-03.jpg" data-fancybox="gallery">
+																<img src="img/features/feature-03.jpg" alt="Feature">
+															</a>
+														</li>
+														<li>
+															<a href="img/features/feature-04.jpg" data-fancybox="gallery">
+																<img src="img/features/feature-04.jpg" alt="Feature">
+															</a>
+														</li>
+													</ul>
+												</div>
+												<div class="clinic-services">
+													<span>Dental Fillings</span>
+													<span> Whitneing</span>
+												</div>
+											</div>
+										</div>
+										<div class="doc-info-right">
+											<div class="clini-infos">
+												<ul>
+													<li><i class="far fa-thumbs-up"></i> 98%</li>
+													<li><i class="far fa-comment"></i> 17 Feedback</li>
+													<li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
+													<li><i class="far fa-money-bill-alt"></i> $300 - $1000 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i> </li>
+												</ul>
+											</div>
+											<div class="clinic-booking">
+												<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+												<a class="apt-btn" href="booking.html">Book Appointment</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>-->
+							<!-- /Doctor Widget -->
+
+							<!-- Doctor Widget -->
+							<% if(user){ user.forEach(function(doctor){ %>
+							<div class="card">
+								<div class="card-body">
+									<div class="doctor-widget">
+										<div class="doc-info-left">
+											<div class="doctor-img">
+												<a href="doctor-profile.html">
+													<img src="data:doctor/<%=doctor.img.contentType%>;base64,<%=doctor.img.data.toString('base64')%>" class="img-fluid" alt="User Image" width="150" height="200">
+												</a>
+											</div>
+											<div class="doc-info-cont">
+												<h4 class="doc-name"><a href="doctor-profile.html"><%=doctor.fname%> <%=doctor.lname%></a></h4>
+												<p class="doc-speciality"><%=doctor.degree%> - <%=doctor.specialist%></p>
+												<h5 class="doc-department"><img src="img/specialities/<%=doctor.specialist%>.png" class="img-fluid" alt="Speciality"><%=doctor.specialist%></h5>
+												<div class="rating">
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star"></i>
+												</div>
+												<div class="clinic-details">
+													<p class="doc-location"><i class="fas fa-map-marker-alt"><%=doctor.state%>, <%=doctor.country%></i></p>
+													<ul class="clinic-gallery">
+														<li>
+															<a href="img/features/feature-01.jpg" data-fancybox="gallery">
+																<img src="img/features/feature-01.jpg" alt="Feature">
+															</a>
+														</li>
+														<li>
+															<a href="img/features/feature-02.jpg" data-fancybox="gallery">
+																<img  src="img/features/feature-02.jpg" alt="Feature">
+															</a>
+														</li>
+														<li>
+															<a href="img/features/feature-03.jpg" data-fancybox="gallery">
+																<img src="img/features/feature-03.jpg" alt="Feature">
+															</a>
+														</li>
+														<li>
+															<a href="img/features/feature-04.jpg" data-fancybox="gallery">
+																<img src="img/features/feature-04.jpg" alt="Feature">
+															</a>
+														</li>
+													</ul>
+												</div>
+												<div class="clinic-services">
+													<%doctor.services.split(",").forEach(function(service){ %>
+													<span><%=service%></span>
+													<%})%>
+												</div>
+											</div>
+										</div>
+										<div class="doc-info-right">
+											<div class="clini-infos">
+												<ul>
+													<li><i class="fas fa-map-marker-alt"></i> <%=doctor.state%>, <%=doctor.country%></li>
+													<li><i class="far fa-money-bill-alt"></i> $50 - $300 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>
+												</ul>
+											</div>
+											<div class="clinic-booking">
+												<a class="apt-btn" href="booking?fname=<%=doctor.fname%>&lname=<%=doctor.lname%>">Book Appointment</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><% })} %>
+							<!-- /Doctor Widget -->
+
+							<!-- Doctor Widget --><!--
+							<div class="card">
+								<div class="card-body">
+									<div class="doctor-widget">
+										<div class="doc-info-left">
+											<div class="doctor-img">
+												<a href="doctor-profile.html">
+													<img src="img/doctors/doctor-thumb-03.jpg" class="img-fluid" alt="User Image">
+												</a>
+											</div>
+											<div class="doc-info-cont">
+												<h4 class="doc-name"><a href="doctor-profile.html">Dr. Deborah Angel</a></h4>
+												<p class="doc-speciality">MBBS, MD - General Medicine, DNB - Cardiology</p>
+												<p class="doc-department"><img src="img/specialities/specialities-04.png" class="img-fluid" alt="Speciality">Cardiology</p>
+												<div class="rating">
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star filled"></i>
+													<i class="fas fa-star"></i>
+													<span class="d-inline-block average-rating">(27)</span>
+												</div>
+												<div class="clinic-details">
+													<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Georgia, USA</p>
+													<ul class="clinic-gallery">
+														<li>
+															<a href="img/features/feature-01.jpg" data-fancybox="gallery">
+																<img src="img/features/feature-01.jpg" alt="Feature">
+															</a>
+														</li>
+														<li>
+															<a href="img/features/feature-02.jpg" data-fancybox="gallery">
+																<img  src="img/features/feature-02.jpg" alt="Feature">
+															</a>
+														</li>
+														<li>
+															<a href="img/features/feature-03.jpg" data-fancybox="gallery">
+																<img src="img/features/feature-03.jpg" alt="Feature">
+															</a>
+														</li>
+														<li>
+															<a href="img/features/feature-04.jpg" data-fancybox="gallery">
+																<img src="img/features/feature-04.jpg" alt="Feature">
+															</a>
+														</li>
+													</ul>
+												</div>
+												<div class="clinic-services">
+													<span>Dental Fillings</span>
+													<span> Whitneing</span>
+												</div>
+											</div>
+										</div>
+										<div class="doc-info-right">
+											<div class="clini-infos">
+												<ul>
+													<li><i class="far fa-thumbs-up"></i> 99%</li>
+													<li><i class="far fa-comment"></i> 35 Feedback</li>
+													<li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
+													<li><i class="far fa-money-bill-alt"></i> $100 - $400 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>
+												</ul>
+											</div>
+											<div class="clinic-booking">
+												<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+												<a class="apt-btn" href="booking.html">Book Appointment</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> -->
+							<!-- /Doctor Widget -->
+	
+						</div>
+					</div>
+
+				</div>
+
+			</div>		<%- include("footerpartial.ejs"); %>
+			<!-- /Footer -->
+
+		</div>
+		<!-- /Main Wrapper -->
+	  
+		<!-- jQuery -->
+		<script src="js/jquery.min.js"></script>
+		
+		<!-- Bootstrap Core JS -->
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		
+		<!-- Sticky Sidebar JS -->
+        <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+        <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+		
+		<!-- Select2 JS -->
+		<script src="plugins/select2/js/select2.min.js"></script>
+		
+		<!-- Datetimepicker JS -->
+		<script src="js/moment.min.js"></script>
+		<script src="js/bootstrap-datetimepicker.min.js"></script>
+		
+		<!-- Fancybox JS -->
+		<script src="plugins/fancybox/jquery.fancybox.min.js"></script>
+		
+		<!-- Custom JS -->
+		<script src="js/script.js"></script>
+		
+	</body>
+
+<!-- doccure/search.html  30 Nov 2019 04:12:16 GMT -->
+</html>

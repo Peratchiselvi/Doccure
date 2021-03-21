@@ -1,0 +1,1304 @@
+<!DOCTYPE html> 
+<html lang="en">
+	
+<!-- doccure/doctor-profile-settings.html  30 Nov 2019 04:12:14 GMT -->
+<head>
+		<meta charset="utf-8">
+		<title>Doccure</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		
+		<!-- Favicons -->
+		<link href="img/favicon.png" rel="icon">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="bootstrap.min.css">
+		
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
+		<link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+		
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css">
+		
+		<link rel="stylesheet" href="plugins/dropzone/dropzone.min.css">
+		
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="style.css">
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+	
+	</head>
+	<body>
+		
+		<%- include("partials.ejs", {user: user}) %>
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+			<div class="content">
+				<div class="container-fluid">
+			
+					<div class="row">
+						<%- include("infopartial.ejs", {user: user}) %>
+						<div class="col-md-7 col-lg-8 col-xl-9">
+							<form action="/doctorProfilesettings" method="POST" enctype="multipart/form-data">
+						
+							<!-- Basic Information -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Basic Information</h4>
+									<div class="row form-row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="change-avatar">
+													<div class="profile-img">
+														<% if(user.img){ %>
+														<img class="rounded-circle"  src="data:doctor/<%=user.img.contentType%>;base64,<%=user.img.data.toString('base64')%>" width="31" alt="Ryan Taylor">
+														<% } else{ %>
+															<img class="rounded-circle"  src="img/doctors/doctor-thumb-02.jpg" width="31">
+														<%	} %>
+													</div>
+													<div class="upload-img">
+														<div class="change-photo-btn">
+															<span><i class="fa fa-upload"></i> Upload Photo</span>
+															<input type="file" class="upload" name="doctorProfile">
+														</div>
+														<small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Username <span class="text-danger">*</span></label>
+												<input type="text" class="form-control" name="username" value="<%=user.username%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Email <span class="text-danger">*</span></label>
+												<input type="email" class="form-control" name="mail" value="<%=user.mail%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>First Name <span class="text-danger">*</span></label>
+												<input type="text" class="form-control" name="fname" value="<%=user.fname%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Last Name <span class="text-danger">*</span></label>
+												<input type="text" class="form-control" name="lname" value="<%=user.lname%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Phone Number</label>
+												<input type="text" class="form-control" name="number" value="<%=user.number%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Gender</label>
+												<select class="form-control select" name="gender">
+													<% if(user){%>
+														<option value="<%=user.gender%>"><%=user.gender%></option>
+														<% if(user.gender == "Male"){ %>
+															<option>Female</option>
+															<% } else{ %>
+																<option>Male</option>
+																<% }}else{ %>
+													<option>Male</option>
+													<option>Female</option><% } %>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group mb-0">
+												<label>Date of Birth</label>
+												<input type="text" class="form-control" name="dob" value="<%=user.dob%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group mb-0">
+												<label>Fees</label>
+												<input type="text" class="form-control" name="dob" value="<%=user.fees%>">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /Basic Information -->
+							
+							<!-- About Me -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">About Me</h4>
+									<div class="form-group mb-0">
+										<label>Biography</label>
+										<textarea class="form-control" rows="5" name="biography" value="<%=user.biography%>"></textarea>
+									</div>
+								</div>
+							</div>
+							<!-- /About Me -->
+							
+							<!-- Clinic Info -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Clinic Info</h4>
+									<div class="row form-row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Clinic Name</label>
+												<input type="text" class="form-control" name="clinicname" value="<%=user.clinicname%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Clinic Address</label>
+												<input type="text" class="form-control" name="clinicaddress" value="<%=user.clinicaddress%>">
+											</div>
+										</div><!--
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Clinic Images</label>
+												<form action="#" class="dropzone"></form>
+											</div>
+											<div class="upload-wrap">
+												<div class="upload-images">
+													<img src="img/features/feature-01.jpg" alt="Upload Image">
+													<a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+												</div>
+												<div class="upload-images">
+													<img src="img/features/feature-02.jpg" alt="Upload Image">
+													<a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+												</div>
+											</div>
+										</div>-->
+									</div>
+								</div>
+							</div>
+							<!-- /Clinic Info -->
+
+							<!-- Contact Details -->
+							<div class="card contact-card">
+								<div class="card-body">
+									<h4 class="card-title">Contact Details</h4>
+									<div class="row form-row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Address Line 1</label>
+												<input type="text" class="form-control" name="address1" value="<%=user.address1%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Address Line 2</label>
+												<input type="text" class="form-control" name="address2" value="<%=user.address2%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">City</label>
+												<input type="text" class="form-control" name="city" value="<%=user.city%>">
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">State / Province</label>
+												<input type="text" class="form-control" name="state" value="<%=user.state%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Country</label>
+												<input type="text" class="form-control" name="country" value="<%=user.country%>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Postal Code</label>
+												<input type="text" class="form-control" name="postalcode" value="<%=user.postalcode%>">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /Contact Details -->
+							
+							<!-- Pricing -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Pricing</h4>
+									
+									<div class="form-group mb-0">
+										<div id="pricing_select">
+											<% if(user){ if(user.rating_option == "free"){  %>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" id="price_free" name="rating_option" class="custom-control-input" checked>
+												<label class="custom-control-label" for="price_free">Free</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" id="price_custom" name="rating_option"class="custom-control-input">
+												<label class="custom-control-label" for="price_custom">Custom Price (per hour)</label>
+											</div><% } else { %>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" id="price_free" name="rating_option" class="custom-control-input" checked>
+													<label class="custom-control-label" for="price_free">Free</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" id="price_custom" name="rating_option" checked class="custom-control-input">
+													<label class="custom-control-label" for="price_custom">Custom Price (per hour)</label>
+												</div> 
+											<% } }else{ %>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" id="price_free" name="rating_option" class="custom-control-input" value="price_free">
+													<label class="custom-control-label" for="price_free">Free</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" id="price_custom" name="rating_option" value="price_custom" class="custom-control-input">
+													<label class="custom-control-label" for="price_custom">Custom Price (per hour)</label>
+												</div><% }%>
+										</div>
+
+									</div>
+									
+									<div class="row custom_price_cont" id="custom_price_cont" style="display: none;">
+										<div class="col-md-4">
+											<input type="text" class="form-control" id="custom_rating_input" name="custom_rating_count" value="<%=user.custom_rating_count%>" placeholder="20">
+											<small class="form-text text-muted">Custom price you can add</small>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+							<!-- /Pricing -->
+							
+							<!-- Services and Specialization -->
+							<div class="card services-card">
+								<div class="card-body">
+									<h4 class="card-title">Services and Specialization</h4>
+									<div class="form-group">
+										<label>Services</label>
+										<% if(user){ %>
+										<input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="<%=user.services%>" id="services">
+										<small class="form-text text-muted">Note : Type & Press enter to add new services</small><%   }else{ %>
+											<input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="Tooth Cleaning" id="services">
+											<small class="form-text text-muted">Note : Type & Press enter to add new services</small><% } %>
+									</div> 
+									<div class="form-group mb-0">
+										<label>Specialization </label>
+										<input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Dentist,Cardiologist,..." name="specialist" value="<%user.specialization%>" id="specialist">
+									</div> 
+								</div>              
+							</div>
+							<!-- /Services and Specialization -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Education</h4>
+									<div class="education-info">
+										<% var i = 0 %>
+										<% if(user.degree){ user.degree.forEach(function(element){ %>
+											<div class="row form-row education-cont">
+												<div class="col-12 col-md-10 col-lg-11">
+													<div class="row form-row">
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Degree</label>
+																<input type="text" class="form-control" name="degree" class="degree" value="<%=element%>">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>College/Institute</label>
+																<input type="text" class="form-control" name="college" value="<%=user.college[i]%>">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Year of Completion</label>
+																<input type="text" class="form-control" name="cYear" value="<%=user.cYear[i]%>">
+															</div> 
+														</div>
+													</div>
+												</div>
+											</div>
+											<% i += 1 }) %>
+											<div class="row form-row education-cont" id="degree1" style="display: none;">
+												<div class="col-12 col-md-10 col-lg-11">
+													<div class="row form-row">
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Degree</label>
+																<input type="text" class="form-control" name="degreenew1" class="degree">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>College/Institute</label>
+																<input type="text" class="form-control" name="college1">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Year of Completion</label>
+																<input type="text" class="form-control" name="cYear1">
+															</div> 
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row form-row education-cont" id="degree2" style="display: none;">
+												<div class="col-12 col-md-10 col-lg-11">
+													<div class="row form-row">
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Degree</label>
+																<input type="text" class="form-control" name="degreenew2" class="degree">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>College/Institute</label>
+																<input type="text" class="form-control" name="college2">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Year of Completion</label>
+																<input type="text" class="form-control" name="cYear2">
+															</div> 
+														</div>
+													</div>
+												</div></div>
+											<% } else { %>
+										<div class="row form-row education-cont">
+											<div class="col-12 col-md-10 col-lg-11">
+												<div class="row form-row">
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Degree</label>
+															<input type="text" class="form-control" name="degree" class="degree">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>College/Institute</label>
+															<input type="text" class="form-control" name="college">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Year of Completion</label>
+															<input type="text" class="form-control" name="cYear">
+														</div> 
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row form-row education-cont" id="degree1" style="display: none;">
+											<div class="col-12 col-md-10 col-lg-11">
+												<div class="row form-row">
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Degree</label>
+															<input type="text" class="form-control" name="degreenew1" class="degree">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>College/Institute</label>
+															<input type="text" class="form-control" name="college1">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Year of Completion</label>
+															<input type="text" class="form-control" name="cYear1">
+														</div> 
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row form-row education-cont" id="degree2" style="display: none;">
+											<div class="col-12 col-md-10 col-lg-11">
+												<div class="row form-row">
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Degree</label>
+															<input type="text" class="form-control" name="degreenew2" class="degree">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>College/Institute</label>
+															<input type="text" class="form-control" name="college2">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Year of Completion</label>
+															<input type="text" class="form-control" name="cYear2">
+														</div> 
+													</div>
+												</div>
+											</div>
+										</div>
+										<% } %>
+									</div>
+									<div class="add-more" id="adddegree">
+										<a href="javascript:void(0);" onclick="degreedisplay()"><i class="fa fa-plus-circle"></i> Add More</a>
+									</div>
+								</div>
+							</div>
+							<!-- /Education -->
+						
+							<!-- Experience -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Experience</h4>
+									<div class="experience-info">
+										<% var i = 0 %>
+										<% if(user.hospitalName){ user.hospitalName.forEach(function(element){ %>
+										<div class="row form-row experience-cont">
+											<div class="col-12 col-md-10 col-lg-11">
+												<div class="row form-row">
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Hospital Name</label>
+															<input type="text" class="form-control" name="hospitalName" value="<%=element%>">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>From</label>
+															<input type="text" class="form-control" name="fromYear" value="<%=user.fromYear[i]%>">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>To</label>
+															<input type="text" class="form-control" name="toYear" value="<%=user.toYear[i]%>">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Designation</label>
+															<input type="text" class="form-control" name="designation" value="<%=user.designation[i]%>">
+														</div> 
+													</div>
+												</div>
+							
+											</div>
+							
+										</div><% i += 1; }) %>
+										<div class="row form-row experience-cont" id="experience1" style="display: none;">
+											<div class="col-12 col-md-10 col-lg-11">
+												<div class="row form-row">
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Hospital Name</label>
+															<input type="text" class="form-control" name="hospitalName1">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>From</label>
+															<input type="text" class="form-control" name="fromYear1">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>To</label>
+															<input type="text" class="form-control" name="toYear1">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Designation</label>
+															<input type="text" class="form-control" name="designation1">
+														</div> 
+													</div>
+												</div></div>
+							
+											</div>
+											<div class="row form-row experience-cont" id="experience2" style="display: none;">
+												<div class="col-12 col-md-10 col-lg-11">
+													<div class="row form-row">
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Hospital Name</label>
+																<input type="text" class="form-control" name="hospitalName2">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>From</label>
+																<input type="text" class="form-control" name="fromYear2">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>To</label>
+																<input type="text" class="form-control" name="toYear2">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Designation</label>
+																<input type="text" class="form-control" name="designation2">
+															</div> 
+														</div>
+													</div>								
+												</div>							
+										</div><% } else { %>
+											<div class="row form-row experience-cont" id="experience">
+												<div class="col-12 col-md-10 col-lg-11">
+													<div class="row form-row">
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Hospital Name</label>
+																<input type="text" class="form-control" name="hospitalName">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>From</label>
+																<input type="text" class="form-control" name="fromYear">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>To</label>
+																<input type="text" class="form-control" name="toYear">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Designation</label>
+																<input type="text" class="form-control" name="designation">
+															</div> 
+														</div>
+													</div>								
+												</div>
+								
+											</div>
+											<div class="row form-row experience-cont" id="experience1" style="display: none;">
+												<div class="col-12 col-md-10 col-lg-11">
+													<div class="row form-row">
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Hospital Name</label>
+																<input type="text" class="form-control" name="hospitalName1">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>From</label>
+																<input type="text" class="form-control" name="fromYear1">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>To</label>
+																<input type="text" class="form-control" name="toYear1">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Designation</label>
+																<input type="text" class="form-control" name="designation1">
+															</div> 
+														</div>
+													</div>								
+												</div>								
+											</div>
+											<div class="row form-row experience-cont" id="experience2" style="display: none;">
+												<div class="col-12 col-md-10 col-lg-11">
+													<div class="row form-row">
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Hospital Name</label>
+																<input type="text" class="form-control" name="hospitalName2">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>From</label>
+																<input type="text" class="form-control" name="fromYear2">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>To</label>
+																<input type="text" class="form-control" name="toYear2">
+															</div> 
+														</div>
+														<div class="col-12 col-md-6 col-lg-4">
+															<div class="form-group">
+																<label>Designation</label>
+																<input type="text" class="form-control" name="designation2">
+															</div> 
+														</div>
+													</div>								
+												</div>								
+											</div><% } %>
+									<div class="add-more" id="addexp">
+										<a href="javascript:void(0);" onclick="experiencedisplay()"><i class="fa fa-plus-circle"></i> Add More</a>
+									</div>
+								</div>
+							</div></div>
+							<!-- /Experience -->
+							
+							<!-- Awards -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Awards</h4>
+									<div class="awards-info">
+										<% var i = 0 %>
+										<% if(user.awards){ user.awards.forEach(function(element){ %>
+										<div class="row form-row awards-cont">
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Awards</label>
+													<input type="text" class="form-control" name="award" value="<%=element%>">
+												</div> 
+											</div>
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Year</label>
+													<input type="text" class="form-control" name="awardYear" value="<%=user.awardYear[i]%>">
+												</div> 
+											</div>
+										</div>
+										<% i += 1; }) %>
+										<div class="row form-row awards-cont" id="award1" style="display: none;">
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Awards</label>
+													<input type="text" class="form-control" name="award1">
+												</div> 
+											</div>
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Year</label>
+													<input type="text" class="form-control" name="awardYear1">
+												</div> 
+											</div>
+										</div>
+										<div class="row form-row awards-cont" id="award2" style="display: none;">
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Awards</label>
+													<input type="text" class="form-control" name="award2">
+												</div> 
+											</div>
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Year</label>
+													<input type="text" class="form-control" name="awardYear2">
+												</div> 
+											</div>
+										</div><% } else {%>
+											<div class="row form-row awards-cont">
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Awards</label>
+														<input type="text" class="form-control" name="award">
+													</div> 
+												</div>
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Year</label>
+														<input type="text" class="form-control" name="awardYear">
+													</div> 
+												</div>
+											</div>
+											<div class="row form-row awards-cont" id="award1">
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Awards</label>
+														<input type="text" class="form-control" name="award1">
+													</div> 
+												</div>
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Year</label>
+														<input type="text" class="form-control" name="awardYear1">
+													</div> 
+												</div>
+											</div>
+											<div class="row form-row awards-cont" id="award2" style="display: none;">
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Awards</label>
+														<input type="text" class="form-control" name="award2">
+													</div> 
+												</div>
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Year</label>
+														<input type="text" class="form-control" name="awardYear2">
+													</div> 
+												</div>
+											</div>
+											<% } %>
+									<div class="add-more" id="addaward" id="addaward">
+										<a href="javascript:void(0);" onclick="awarddisplay()"><i class="fa fa-plus-circle"></i> Add More</a>
+									</div>
+								</div>
+							</div>
+						</div>	
+							<!-- /Awards -->
+							
+							<!-- Memberships -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Memberships</h4>
+									<div class="membership-info">
+										<% var i = 0 %>
+										<% if(user.membership){ user.membership.forEach(function(element){ %>
+										<div class="row form-row membership-cont">
+											<div class="col-12 col-md-10 col-lg-5">
+												<div class="form-group">
+													<label>Memberships</label>
+													<input type="text" class="form-control" name="member" value="<%=element%>">
+												</div> 
+											</div>
+										</div><% i += 1; }) %>
+										<div class="row form-row membership-cont" id="membership1" style="display: none;">
+											<div class="col-12 col-md-10 col-lg-5">
+												<div class="form-group">
+													<label>Memberships</label>
+													<input type="text" class="form-control" name="member1">
+												</div> 
+											</div>
+										</div>
+										<div class="row form-row membership-cont" id="membership2" style="display: none;">
+											<div class="col-12 col-md-10 col-lg-5">
+												<div class="form-group">
+													<label>Memberships</label>
+													<input type="text" class="form-control" name="member2">
+												</div> 
+											</div>
+										</div>
+										<% } else { %>
+											<div class="row form-row membership-cont">
+												<div class="col-12 col-md-10 col-lg-5">
+													<div class="form-group">
+														<label>Memberships</label>
+														<input type="text" class="form-control" name="member">
+													</div> 
+												</div>
+											</div>
+											<div class="row form-row membership-cont" id="membership1" style="display: none;">
+												<div class="col-12 col-md-10 col-lg-5">
+													<div class="form-group">
+														<label>Memberships</label>
+														<input type="text" class="form-control" name="member1">
+													</div> 
+												</div>
+											</div>
+											<div class="row form-row membership-cont" id="membership2" style="display: none;">
+												<div class="col-12 col-md-10 col-lg-5">
+													<div class="form-group">
+														<label>Memberships</label>
+														<input type="text" class="form-control" name="member2">
+													</div> 
+												</div>
+											</div><% } %>
+									<div class="add-more" id="addmember">
+										<a href="javascript:void(0);" onclick="membershipdisplay()"><i class="fa fa-plus-circle"></i> Add More</a>
+									</div>
+								</div>
+							</div></div>
+							<!-- /Memberships -->
+							
+							<!-- Registrations -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Registrations</h4>
+									<div class="registrations-info">
+										<% var i = 0 %>
+										<% if(user.registration){ user.registration.forEach(function(element){ %>
+										<div class="row form-row reg-cont">
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Registrations</label>
+													<input type="text" class="form-control" name="registration" value="<%=element%>">
+												</div> 
+											</div>
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Year</label>
+													<input type="text" class="form-control" name="registeredYear" value="<%=user.registeredYear[i]%>">
+												</div> 
+											</div>
+										</div><% i += 1; }) %>
+										<div class="row form-row reg-cont" id="reg1" style="display: none;">
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Registrations</label>
+													<input type="text" class="form-control" name="registration1">
+												</div> 
+											</div>
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Year</label>
+													<input type="text" class="form-control" name="registeredYear1">
+												</div> 
+											</div>
+										</div>
+										<div class="row form-row reg-cont" id="reg2" style="display: none;">
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Registrations</label>
+													<input type="text" class="form-control" name="registration2">
+												</div> 
+											</div>
+											<div class="col-12 col-md-5">
+												<div class="form-group">
+													<label>Year</label>
+													<input type="text" class="form-control" name="registeredYear2">
+												</div> 
+											</div>
+										</div><% } else{ %>
+											<div class="row form-row reg-cont">
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Registrations</label>
+														<input type="text" class="form-control" name="registration">
+													</div> 
+												</div>
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Year</label>
+														<input type="text" class="form-control" name="registeredYear">
+													</div> 
+												</div>
+											</div>
+											<div class="row form-row reg-cont" id="reg1" style="display: none;">
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Registrations</label>
+														<input type="text" class="form-control" name="registration1">
+													</div> 
+												</div>
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Year</label>
+														<input type="text" class="form-control" name="registeredYear1">
+													</div> 
+												</div>
+											</div>
+											<div class="row form-row reg-cont" id="reg2" style="display: none;">
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Registrations</label>
+														<input type="text" class="form-control" name="registration2">
+													</div> 
+												</div>
+												<div class="col-12 col-md-5">
+													<div class="form-group">
+														<label>Year</label>
+														<input type="text" class="form-control" name="registeredYear2">
+													</div> 
+												</div>
+											</div><% } %>	
+									<div class="add-more" id="addreg">
+										<a href="javascript:void(0);" onclick="regdisplay()"><i class="fa fa-plus-circle"></i> Add More</a>
+									</div>
+								</div>
+							</div></div>
+						
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title">Schedule Timings</h4>
+												<div class="profile-box"><!--
+													<div class="row">
+	
+														<div class="col-lg-4">
+															<div class="form-group">               
+																<label>Timing Slot Duration</label>
+																<select class="select form-control">
+																	<option>-</option>
+																	<option>15 mins</option>
+																	<option selected="selected">30 mins</option>  
+																	<option>45 mins</option>
+																	<option>1 Hour</option>
+																</select>
+															</div>
+														</div>
+	
+													</div>   -->  
+													<div class="row">
+														<div class="col-md-12">
+															<div class="card schedule-widget mb-0">
+															
+																<!-- Schedule Header -->
+																<div class="schedule-header">
+																
+																	<!-- Schedule Nav -->
+																	<div class="schedule-nav">
+																		<ul class="nav nav-tabs nav-justified">
+																			<% const dayArray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]; %>
+																			<% dayArray.forEach(function(day) { %>
+																			<li class="nav-item">
+																				<a class="nav-link" data-toggle="tab" href="#slot_<%=day%>"><%=day%></a>
+																			</li><% }) %>
+																			<!--
+																			<li class="nav-item">
+																				<a class="nav-link active" data-toggle="tab" href="#slot_monday">Monday</a>
+																			</li>
+																			<li class="nav-item">
+																				<a class="nav-link" data-toggle="tab" href="#slot_tuesday">Tuesday</a>
+																			</li>
+																			<li class="nav-item">
+																				<a class="nav-link" data-toggle="tab" href="#slot_wednesday">Wednesday</a>
+																			</li>
+																			<li class="nav-item">
+																				<a class="nav-link" data-toggle="tab" href="#slot_thursday">Thursday</a>
+																			</li>
+																			<li class="nav-item">
+																				<a class="nav-link" data-toggle="tab" href="#slot_friday">Friday</a>
+																			</li>
+																			<li class="nav-item">
+																				<a class="nav-link" data-toggle="tab" href="#slot_saturday">Saturday</a>
+																			</li>-->
+																		</ul>
+																	</div></div>
+																	<!-- /Schedule Nav -->
+																<!-- /Schedule Header -->
+																
+																<!-- Schedule Content -->
+																<div class="tab-content schedule-cont">
+																	<div id="slot_Sunday" class="tab-pane fade">
+																		<% var day = "sun" %>
+																		<h4 class="card-title d-flex justify-content-between">
+																			<span>Time Slots</span> 
+																			<a class="edit-link" data-toggle="modal" href= "#" onclick="timeslot('<%=day%>'); return false;"><i class="fa fa-plus-circle"></i> Add Slot</a>
+																		</h4>
+																		<p class="text-muted mb-0">Not Available</p>
+																	</div>
+																	<div id="slot_Monday" class="tab-pane fade show active">
+																		<% var day = "mon" %>
+																		<h4 class="card-title d-flex justify-content-between">
+																			<span>Time Slots</span> 
+																			<a id="edit-link-mon" data-toggle="modal" href= "#" onclick="timeslot('<%=day%>'); return false;"><i class="fa fa-plus-circle"></i> Add Slot</a>
+																		</h4>
+																		<p class="text-muted mb-0">Not Available</p><!--
+																		<h4 class="card-title d-flex justify-content-between">
+																			<span>Time Slots</span> 
+																			<a class="edit-link" data-toggle="modal" href="#edit_time_slot"><i class="fa fa-edit mr-1"></i>Edit</a>
+																		</h4>
+																		
+																		<div class="doc-times">
+																			<div class="doc-slot-list">
+																				8:00 pm - 11:30 pm
+																				<a href="javascript:void(0)" class="delete_schedule">
+																					<i class="fa fa-times"></i>
+																				</a>
+																			</div>
+																			<div class="doc-slot-list">
+																				11:30 pm - 1:30 pm
+																				<a href="javascript:void(0)" class="delete_schedule">
+																					<i class="fa fa-times"></i>
+																				</a>
+																			</div>
+																			<div class="doc-slot-list">
+																				3:00 pm - 5:00 pm
+																				<a href="javascript:void(0)" class="delete_schedule">
+																					<i class="fa fa-times"></i>
+																				</a>
+																			</div>
+																			<div class="doc-slot-list">
+																				6:00 pm - 11:00 pm
+																				<a href="javascript:void(0)" class="delete_schedule">
+																					<i class="fa fa-times"></i>
+																				</a>
+																			</div>
+																		</div>-->
+																		
+																	</div>
+															
+																	<div id="slot_Tuesday" class="tab-pane fade">
+																		<h4 class="card-title d-flex justify-content-between">
+																			<span>Time Slots</span> 
+																			<a class="edit-link" data-toggle="modal" href= "#" onclick="timeslot('<%=day%>'); return false;"><i class="fa fa-plus-circle"></i> Add Slot</a>
+																		</h4>
+																		<p class="text-muted mb-0">Not Available</p>
+																	</div>
+																	<div id="slot_Wednesday" class="tab-pane fade">
+																		<h4 class="card-title d-flex justify-content-between">
+																			<span>Time Slots</span> 
+																			<a class="edit-link" data-toggle="modal" href= "#" onclick="timeslot('<%=day%>'); return false;"><i class="fa fa-plus-circle"></i> Add Slot</a>
+																		</h4>
+																		<p class="text-muted mb-0">Not Available</p>
+																	</div>
+																	<div class="tab-pane fade" id="slot_Thursday">
+																		<h4 class="card-title d-flex justify-content-between">
+																			<span>Time Slots</span> 
+																			<a class="edit-link" data-toggle="modal" href= "#" onclick="timeslot('<%=day%>'); return false;"><i class="fa fa-plus-circle"></i> Add Slot</a>
+																		</h4>
+																		<p class="text-muted mb-0">Not Available</p>
+																	</div>
+																	<div id="slot_Friday" class="tab-pane fade">
+																		<h4 class="card-title d-flex justify-content-between">
+																			<span>Time Slots</span> 
+																			<a class="edit-link" data-toggle="modal" href= "#" onclick="timeslot('<%=day%>'); return false;"><i class="fa fa-plus-circle"></i> Add Slot</a>
+																		</h4>
+																		<p class="text-muted mb-0">Not Available</p>
+																	</div>
+																	<div id="slot_Saturday" class="tab-pane fade">
+																		<h4 class="card-title d-flex justify-content-between">
+																			<span>Time Slots</span> 
+																			<a class="edit-link" data-toggle="modal" href= "#" onclick="timeslot('<%=day%>'); return false;"><i class="fa fa-plus-circle"></i> Add Slot</a>
+																		</h4>
+																		<p class="text-muted mb-0">Not Available</p>
+																	</div>
+	
+																</div>
+																
+															</div>
+														</div>
+													</div></div>
+						</div>
+	
+					</div>
+	
+							<!-- /Registrations --><button onclick="print()">hi</button>
+							
+							<div class="submit-section submit-btn-bottom">
+								<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+							</div></form></div></div></div>	</div>
+			<!-- /Page Content -->
+		<%- include("footerpartial.ejs") %>
+		   
+		</div>
+		<!-- /Main Wrapper -->
+		
+		<!-- Add Time Slot Modal -->
+		<div class="modal fade custom-modal" id="add_time_slot">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Add Time Slots</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+							<div class="hours-info" id="sunslot">
+								<div class="row form-row hours-cont">
+									<div class="col-12 col-md-10">
+										<div class="row form-row">
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Start Time</label>
+													<select class="form-control" name="starttime" id="monstarttime">
+														<option>-</option>
+														<option>12.00 am</option>
+														<option>12.30 am</option>  
+														<option>1.00 am</option>
+														<option>1.30 am</option>
+													</select>
+												</div> 
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>End Time</label>
+													<select class="form-control" name="endtime">
+														<option>-</option>
+														<option>12.00 am</option>
+														<option>12.30 am</option>  
+														<option>1.00 am</option>
+														<option>1.30 am</option>
+													</select>
+												</div> 
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="hours-info" id="sunslot1" style="display: none;">
+								<div class="row form-row hours-cont">
+									<div class="col-12 col-md-10">
+										<div class="row form-row">
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Start Time</label>
+													<select class="form-control" name="starttime1">
+														<option>-</option>
+														<option>12.00 am</option>
+														<option>12.30 am</option>  
+														<option>1.00 am</option>
+														<option>1.30 am</option>
+													</select>
+												</div> 
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>End Time</label>
+													<select class="form-control" name="endtime1">
+														<option>-</option>
+														<option>12.00 am</option>
+														<option>12.30 am</option>  
+														<option>1.00 am</option>
+														<option>1.30 am</option>
+													</select>
+												</div> 
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="hours-info" id="sunslot2" style="display: none;">
+								<div class="row form-row hours-cont">
+									<div class="col-12 col-md-10">
+										<div class="row form-row">
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>Start Time</label>
+													<select class="form-control" name="starttime2">
+														<option>-</option>
+														<option>12.00 am</option>
+														<option>12.30 am</option>  
+														<option>1.00 am</option>
+														<option>1.30 am</option>
+													</select>
+												</div> 
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label>End Time</label>
+													<select class="form-control" name="endtime2">
+														<option>-</option>
+														<option>12.00 am</option>
+														<option>12.30 am</option>  
+														<option>1.00 am</option>
+														<option>1.30 am</option>
+													</select>
+												</div> 
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="add-more mb-3" onclick="addsunslot()">
+								<a href="javascript:void(0);" class="add-hours"><i class="fa fa-plus-circle"></i> Add More</a>
+							</div>
+							<div class="submit-section text-center">
+								<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	  
+		<!-- jQuery -->
+		<script>
+			var degCount = 0;
+			function degreedisplay(){
+				document.getElementById("degree1").style.display = "block";
+				if(degCount == 1){
+				document.getElementById("degree2").style.display = "block";
+				document.getElementById("adddegree").style.display = "none";
+				}
+				degCount += 1;
+			}
+			var expCount = 0;
+			function experiencedisplay(){
+				document.getElementById("experience1").style.display = "block";
+				if(expCount == 1){
+				document.getElementById("experience2").style.display = "block";
+				document.getElementById("addexp").style.display = "none";
+				}
+				expCount += 1;
+			}
+			var awardCount = 0;
+			function awarddisplay(){
+				document.getElementById("award1").style.display = "block";
+				if(awardCount == 1){
+				document.getElementById("award2").style.display = "block";
+				document.getElementById("addaward").style.display = "none";
+				}
+				awardCount += 1;
+			}
+			var memberCount = 0;
+			function membershipdisplay(){
+				document.getElementById("membership1").style.display = "block";
+				if(memberCount == 1){
+				document.getElementById("membership2").style.display = "block";
+				document.getElementById("addmember").style.display = "none";
+				}
+				memberCount += 1;
+			}
+			var regCount = 0;
+			function regdisplay(){
+				document.getElementById("reg1").style.display = "block";
+				if(regCount == 1){
+				document.getElementById("reg2").style.display = "block";
+				document.getElementById("addreg").style.display = "none";
+				}
+				regCount += 1;
+			}
+			var sunCount = 0;
+			function regdisplay(){
+				document.getElementById("sunslot1").style.display = "block";
+				if(sunCount == 1){
+				document.getElementById("sunslot2").style.display = "block";
+				document.getElementById("addsunslot").style.display = "none";
+				}
+				sunCount += 1;
+			}
+			var regCount = 0;
+			function regdisplay(){
+				document.getElementById("reg1").style.display = "block";
+				if(regCount == 1){
+				document.getElementById("reg2").style.display = "block";
+				document.getElementById("addreg").style.display = "none";
+				}
+				regCount += 1;
+			}
+			function timeslot(day){
+				console.log("add_time_slot_" + day);
+				document.getElementById("edit-link-mon").href = "#add_time_slot";
+			}
+		</script>
+		<script src="js/jquery.min.js"></script>
+		
+		<!-- Bootstrap Core JS -->
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		
+		<!-- Sticky Sidebar JS -->
+        <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+        <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+		
+		<!-- Select2 JS -->
+		<script src="plugins/select2/js/select2.min.js"></script>
+		
+		<!-- Dropzone JS -->
+		<script src="plugins/dropzone/dropzone.min.js"></script>
+		
+		<!-- Bootstrap Tagsinput JS -->
+		<script src="plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
+		
+		<!-- Profile Settings JS -->
+		<script src="js/profile-settings.js"></script>
+		
+		<!-- Custom JS -->
+		<script src="js/script.js"></script>
+		
+	</body>
+
+<!-- doccure/doctor-profile-settings.html  30 Nov 2019 04:12:15 GMT -->
+</html>
