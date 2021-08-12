@@ -587,10 +587,10 @@ app.get('/forgot-password.html', function(req, res){
 app.post('/forgot-password', urlEncoded, function(req, res){
     var transporter = nodemailer.createTransport({
         service: "gmail",
-        auth: {user: "selvikumar901@gmail.com", pass: "peratchi2002"}
+        auth: {user: "*******", pass: "******"}
     });
     var mail = req.body.mail;
-    const maildocdetails = {from: "selvikumar901@gmail.com", to: mail, subject: "Reset Password", html: "<a href='reset?mail='" + mail + ">Click Here</a>"}
+    const maildocdetails = {from: "*******", to: mail, subject: "Reset Password", html: "<a href='reset?mail='" + mail + ">Click Here</a>"}
     const mailindb = {mail: mail};
     mongoclient.connect(url, {useUnifiedTopology: true}, function(err, db){
         const dbc = db.db("docdb");
